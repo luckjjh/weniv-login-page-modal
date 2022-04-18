@@ -18,7 +18,7 @@
       <h1 class="blind">로그인 박스</h1>
       <img class="weniv-logo" src="./img/weniv-logo.png" alt="위니브 로고" />
       <p class="sub-text">위니브를 더 즐겁고 편리하게 이용하세요.</p>
-      <button class="login-btn" href="">로그인</button>
+      <button class="login-btn">로그인</button>
     </article>
 
     <article class="login-modal">
@@ -30,19 +30,24 @@
         </div>
         <div class="topline"></div>
         <p class="sub-text">위니브에서 여러분의 궁금증을 해결하세요! :)</p>
-        <form class="user-input-wrap" action="">
+        <form class="user-input-wrap" action="#">
           <input
+            id="user-id"
             class="user-input-box"
             type="text"
             placeholder="아이디"
-            required
           />
+          <div class="error-line"></div>
+          <strong class="id-error">아이디를 입력해 주세요.</strong>
           <input
+            id="user-pw"
             class="user-input-box"
             type="password"
             placeholder="비밀번호"
-            required
           />
+          <div class="info-error">
+            아이디 혹은 비밀번호가 일치하지 않습니다.
+          </div>
           <input
             id="login-status-btn"
             class="login-status-btn"
@@ -51,7 +56,7 @@
           <label for="login-status-btn" class="login-status-text"
             >로그인 상태 유지</label
           >
-          <button class="login-btn">로그인</button>
+          <button id="modal-login-btn" class="login-btn">로그인</button>
         </form>
         <ul class="user-function-wrap">
           <li class="user-function-list">
@@ -107,6 +112,22 @@
           $(".login-modal").hide();
           modalCheck = false;
         }
+      });
+      $("#modal-login-btn").click(function () {
+        let userID = $("#user-id").val();
+        if (userID == "") {
+          $(".id-error").show();
+          $(".error-line").show();
+          $("#user-id").css("border", "2px solid #F4492E");
+        } else {
+          $(".info-error").show();
+        }
+      });
+      $("#user-id").focus(function () {
+        $("#user-id").css("border", "");
+        $(".id-error").hide();
+        $(".error-line").hide();
+        $(".info-error").hide();
       });
     </script>
   </body>
